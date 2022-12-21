@@ -28,19 +28,16 @@ window.onload = function(){
         dogs.push(new_dog);
     }
 
-    // dogs.forEach(function(d){
-    //     d.drawModel();
-    // });
+    dogs.forEach(function(d){
+        d.drawModel();
+    });
 
 
-    cat = new Model();
-    cat.getModel("cat");
-    cat.setScale(1.2, 1.2, 1.2);
-    cat.setTranslate(0.0, 0.5, 0.0);
-    //cat.drawModel();
-
-    console.log(dogs)
-    console.log(cat)
+    panda = new Model();
+    panda.getModel("panda");
+    panda.setScale(1.2, 1.2, 1.2);
+    panda.setTranslate(0.0, 0.5, 0.0);
+    panda.drawModel();
 
     animate();
 }
@@ -50,12 +47,12 @@ let angle = 0;
 function animate(){
     clear();
 
-    cat.setRotateDelta(
+    panda.setRotateDelta(
         0.0,
         0.1,
         0.0
     );
-    cat.drawModel();
+    panda.drawModel();
 
     dogs.forEach(function(dog){
          dog.setRotateDelta(
@@ -75,7 +72,7 @@ function animate(){
 
 
 
-    angle += 0.05;
+    angle += 0.2;
     requestAnimationFrame(animate);
 }
 

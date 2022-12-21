@@ -134,15 +134,19 @@ class Model {
         this.model.textures_coords = texture_coords;
 
 
-        this.model.faces[0].forEach(function (face, index){
-            if(index !== 0){
-                self.model.vertexes_with_indexes.push(
-                    self.model.vertexes[face * 3],
-                    self.model.vertexes[face * 3 + 1],
-                    self.model.vertexes[face * 3 + 2],
-                );
-            }
-        });
+        for(let i = 0; i < this.model.faces.length; i++){
+            this.model.vertexes_with_indexes.push([]);
+
+            this.model.faces[i].forEach(function (face, index){
+                if(index !== 0){
+                    self.model.vertexes_with_indexes[self.model.vertexes_with_indexes.length - 1].push(
+                        self.model.vertexes[face * 3],
+                        self.model.vertexes[face * 3 + 1],
+                        self.model.vertexes[face * 3 + 2],
+                    );
+                }
+            });
+        }
     }
 
     setTexture(texture_src, texture_coords){
@@ -202,14 +206,14 @@ class Model {
         for(let i = 0; i < this.model.faces.length; i++){
             let texture_src = this.model.faces[i][0];
             let texture_coords = this.model.textures_coords[i];
-            let faces_data = this.model.faces[i].slice(1);
+            let vertexes = this.model.vertexes_with_indexes[i];
 
             this.setTexture(texture_src, texture_coords);
             gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
-            gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.model.vertexes_with_indexes), gl.STATIC_DRAW);
+            gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertexes), gl.STATIC_DRAW);
             gl.vertexAttribPointer(a_position, 3, gl.FLOAT, false,  0, 0);
 
-            gl.drawArrays(gl.TRIANGLES, 0, this.model.vertexes_with_indexes.length);
+            gl.drawArrays(gl.TRIANGLES, 0, vertexes.length);
         }
     }
 
