@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Задание 3 | 2 текстуры</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+  <canvas id="canvas3D" width="3000" height="3000">Ваш браузер не поддерживает элемент canvas</canvas>
+</div>
+
+<img hidden src="/models/boat/360_F_180888381_rdtPrvoRyUt7QcsWctphVkc0C40dJdJ0.jpg">
+<img hidden src="/models/boat/2022-07-24_144941b.jpg">
+<img hidden src="/models/boat/2022-08-01_144625b.jpg">
+<img hidden src="/models/boat/2022-09-23_192605.jpg">
+<img hidden src="/models/boat/2022-10-03_235332.jpg">
+<img hidden src="/models/boat/2022-10-08_203920.jpg">
+<img hidden src="/models/boat/2022-10-10_134238.jpg">
+<img hidden src="/models/boat/2022-11-25_114846.jpg">
+<img hidden src="/models/boat/2022-10-03_235332.jpg">
+<img hidden src="/models/boat/15744-v1.jpg">
+<img hidden src="/models/boat/3568320750_9484f9303e_b.jpg">
+<img hidden src="/models/boat/abstract-red-blurred-background-with-dots-pattern-texture-vector.jpg">
+<img hidden src="/models/boat/Depositphotos_134165694_s-2015.jpg">
+<img hidden src="/models/boat/glas_512.jpg">
+<img hidden src="/models/boat/glass1a.bmp">
+<img hidden src="/models/boat/GRYTARN.jpg">
+<img hidden src="/models/boat/istockphoto-1001618062-612x612.jpg">
+
+<img hidden src="/models/girl/COLORS.jpg">
+<img hidden src="/models/girl/Body-Skin-Base-Color.png">
+<img hidden src="/models/girl/bot-color.jpg">
+<img hidden src="/models/girl/FACE-Base-Color.png">
+<img hidden src="/models/girl/top-color.png">
+<img hidden src="/models/girl/FACE%20Base%20Color%20apha.png">
+
+<img hidden src="/models/cube/Cube_diffuse.jpg">
+
+<img hidden src="/models/chair/basketball-floor-texture.jpg">
+
+
+<img hidden src="/models/penguin/Penguin_Diffuse_Color.png">
+
+</body>
+
+<script id="shader-vs" type="x-shader/x-vertex">
+    attribute vec3 a_position;
+    attribute vec2 a_textCoords;
+    varying vec2 v_textCoords;
+
+    uniform mat4 u_mvMatrix;
+    uniform mat4 u_pMatrix;
+
+    uniform mat4 u_scale;
+    uniform mat4 u_translate;
+    uniform mat4 u_rotate;
+
+    void main(void) {
+        v_textCoords = a_textCoords;
+
+        gl_Position = u_pMatrix *
+                      u_mvMatrix *
+
+                      u_translate *
+                      u_scale *
+                      u_rotate *
+                      vec4(a_position, 1.0);
+    }
+</script>
+<!--texture2D(u_sampler, v_textCoords)-->
+
+<script id="shader-fs" type="x-shader/x-fragment">
+    precision highp float;
+    uniform sampler2D u_sampler;
+    varying vec2 v_textCoords;
+
+    void main(void) {
+        gl_FragColor = texture2D(u_sampler, v_textCoords);
+    }
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gl-matrix/2.8.1/gl-matrix-min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+<script src="scripts/setup.js"></script>
+<script src="scripts/camera.js"></script>
+<script src="scripts/model.js"></script>
+<script src="scripts/transform.js"></script>
+<script src="scripts/script.js"></script>
+</html>
