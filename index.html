@@ -44,6 +44,11 @@
 
 <img hidden src="/models/penguin/Penguin_Diffuse_Color.png">
 
+<img hidden src="/models/cat/cat_tex512.jpg">
+<img hidden src="/models/cat/default-grey.jpg">
+
+<img hidden src="/models/dog/cnv_BULLDOG_STRIDER.JPG">
+
 </body>
 
 <script id="shader-vs" type="x-shader/x-vertex">
@@ -59,7 +64,8 @@
     uniform mat4 u_rotate;
 
     void main(void) {
-        v_textCoords = a_textCoords;
+        v_textCoords.x = a_textCoords.x;
+        v_textCoords.y = 1.0 - a_textCoords.y;
 
         gl_Position = u_pMatrix *
                       u_mvMatrix *

@@ -1,45 +1,46 @@
-let penguins = [];
-let girl;
+let dogs = [];
+let cat;
 
 window.onload = function(){
     setup();
     clear();
 
-    let penguin = new Model();
-    penguin.getModel("penguin");
-    penguin.setTranslate(0.0, -0.8, 1.5);
-    // penguin.drawModel();
-    // penguins.push(penguin);
+    let dog = new Model();
+    dog.getModel("dog");
+    dog.setTranslate(0.0, -0.8, 1.5);
 
     for(let i = 0; i < 10; i++){
-        let new_penguin = new Model();
-        new_penguin.cloneFromModel(penguin);
+        let new_dog = new Model();
+        new_dog.cloneFromModel(dog);
 
-        let f = Math.random() * (2.5 - 0.3) + 0.3;
-        let s = Math.random() * (0.6 - 0.3) + 0.3;
-        new_penguin.setScale(s, s, s);
+        let f = Math.random() * (0.5 - 0.3) + 0.3;
+        let s = Math.random() * (0.2 - 0.4) + 0.4;
+        new_dog.setScale(s, s, s);
 
-        new_penguin.setTranslate(
-            Math.cos(i*40*Math.PI/180) * 1.5 * f,
-            new_penguin.model.position[1],
-            Math.sin(i*40*Math.PI/180) * 1.5 * f
+        new_dog.setTranslate(
+            Math.cos(i*40*Math.PI/180) * 3.0 * f,
+            new_dog.model.position[1],
+            Math.sin(i*40*Math.PI/180) * 3.0 * f
         );
 
-        new_penguin.model.factor = f;
+        new_dog.model.factor = f;
 
-        penguins.push(new_penguin);
+        dogs.push(new_dog);
     }
 
-    penguins.forEach(function(p){
-        p.drawModel();
-    });
+    // dogs.forEach(function(d){
+    //     d.drawModel();
+    // });
 
 
-    girl = new Model();
-    girl.getModel("girl");
-    girl.setScale(1.2, 1.2, 1.2);
-    girl.setTranslate(0.0, -0.8, 0.0);
-    girl.drawModel();
+    cat = new Model();
+    cat.getModel("cat");
+    cat.setScale(1.2, 1.2, 1.2);
+    cat.setTranslate(0.0, 0.5, 0.0);
+    //cat.drawModel();
+
+    console.log(dogs)
+    console.log(cat)
 
     animate();
 }
@@ -49,30 +50,32 @@ let angle = 0;
 function animate(){
     clear();
 
-    penguins.forEach(function(penguin){
-         penguin.setRotateDelta(
+    cat.setRotateDelta(
+        0.0,
+        0.1,
+        0.0
+    );
+    cat.drawModel();
+
+    dogs.forEach(function(dog){
+         dog.setRotateDelta(
              0.0,
-             Math.random() * penguin.model.factor,
+             Math.random() * dog.model.factor,
              0.0
          );
 
-        penguin.setTranslate(
-            Math.cos((angle / penguin.model.factor) * Math.PI/180) * 1.5 * penguin.model.factor,
+        dog.setTranslate(
+            Math.cos((angle / dog.model.factor) * Math.PI/180) * 5.0 * dog.model.factor,
             0.0,
-            Math.sin((angle / penguin.model.factor) *Math.PI/180) * 1.5 * penguin.model.factor
+            Math.sin((angle / dog.model.factor) *Math.PI/180) * 5.0 * dog.model.factor
         );
 
-        penguin.drawModel();
+        dog.drawModel();
      });
 
-    girl.setRotateDelta(
-        0.0,
-        0.5,
-        0.0
-    );
-   girl.drawModel();
 
-    angle += 0.5;
+
+    angle += 0.05;
     requestAnimationFrame(animate);
 }
 

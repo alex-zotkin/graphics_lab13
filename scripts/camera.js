@@ -55,6 +55,7 @@ class Camera {
 
 
 
+
     _mouseLastPosition = {
         x: 0,
         y: 0
